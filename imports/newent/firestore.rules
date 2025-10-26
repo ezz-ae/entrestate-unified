@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function authed() { return request.auth != null; }
+    function isOwner(uid) { return authed() && request.auth.uid == uid; }
+
+    match /users/{uid} {
+      allow read, update: if isOwner(uid);
+      allow create: if authed();
+      match /{sub=**}/{doc} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+
+    match /projects_catalog/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /flows/{flowId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /events/{doc} {
+      allow create: if authed();
+      allow read: if isOwner(resource.data.uid);
+    }
+  }
+}
