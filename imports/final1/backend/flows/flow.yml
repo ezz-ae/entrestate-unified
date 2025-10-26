@@ -1,0 +1,6 @@
+steps:
+  - job: enrich_projects
+  - job: valuate_projects
+    needs: [enrich_projects]
+  - job: export_snapshots
+    needs: [valuate_projects]
