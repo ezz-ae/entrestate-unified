@@ -1,0 +1,88 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  source_insertMany(data: [
+    {
+      id: "6766c87b-37d4-4c95-9c53-57a0f55a3847",
+      type: "website",
+      url: "https://example.com/about",
+      path: "/about"
+    },
+    {
+      id: "6766c87b-37d4-4c95-9c53-57a0f55a3848",
+      type: "pdf",
+      url: "https://example.com/report.pdf",
+      path: "/report.pdf"
+    }
+  ])
+  document_insertMany(data: [
+    {
+      id: "8494580a-011f-4499-b29f-d8280969945b",
+      sourceId: "6766c87b-37d4-4c95-9c53-57a0f55a3847",
+      title: "About Us",
+    },
+    {
+      id: "8494580a-011f-4499-b29f-d8280969945c",
+      sourceId: "6766c87b-37d4-4c95-9c53-57a0f55a3848",
+      title: "Annual Report",
+    }
+  ])
+  chunk_insertMany(data: [
+    {
+      documentId: "8494580a-011f-4499-b29f-d8280969945b",
+      text: "This is a chunk of text from the about us page.",
+    },
+    {
+      documentId: "8494580a-011f-4499-b29f-d8280969945c",
+      text: "This is a chunk of text from the annual report.",
+    }
+  ])
+  conversation_insertMany(data: [
+    {
+      id: "123e4567-e89b-12d3-a456-426614174000",
+      title: "Test Conversation"
+    }
+  ])
+  message_insertMany(data: [
+    {
+      conversationId: "123e4567-e89b-12d3-a456-426614174000",
+      content: "Hello, world!",
+      role: "user",
+      ts: "2024-04-26T12:00:00Z"
+    }
+  ])
+  entity_insertMany(data: [
+    {
+      id: "29eb4b51-5c33-4455-9915-d0d76235775a",
+      name: "Example Entity",
+      type: "organization"
+    }
+  ])
+  metadata_insertMany(data: [
+    {
+      id: "300a0000-011f-4499-b29f-d8280969945c",
+      createdAt: "2024-04-26T12:00:00Z",
+      description: "Example metadata",
+      owner: "example",
+      updatedAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  permission_insertMany(data: [
+    {
+      principal: "user123",
+      scope: "read"
+    }
+  ])
+  place_insertMany(data: [
+    {
+      id: "50000000-011f-4499-b29f-d8280969945c",
+      geometry: "POINT(0 0)",
+      name: "Example Place"
+    }
+  ])
+  task_insertMany(data: [
+    {
+      id: "60000000-011f-4499-b29f-d8280969945c",
+      status: "pending",
+      title: "Example Task"
+    }
+  ])
+}

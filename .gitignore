@@ -1,0 +1,27 @@
+# Next.js build output
+.next/
+out/
+
+# Firebase
+.firebase/
+firebase-debug.log
+functions/firebase-debug.log
+functions/firestore-debug.log
+
+# Node dependencies
+node_modules/
+functions/node_modules/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS and editor
+.DS_Store
+.env
+.env.local
