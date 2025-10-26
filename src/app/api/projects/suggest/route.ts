@@ -1,5 +1,5 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, bad, fail } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
 
@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
     const country = req.cookies.get("country")?.value || "AE";
     const city = req.cookies.get("city")?.value || "Dubai";
-
+    const adminDb = getAdminDb();
     let q = adminDb.collection("projects_catalog")
       .where("country", "==", country);
 

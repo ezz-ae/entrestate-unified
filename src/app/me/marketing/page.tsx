@@ -1,9 +1,8 @@
 
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { PageHeader } from '@/components/ui/page-header';
+import { PageHeader } from "@/components/ui/page-header";
 import { LayoutGrid, Search } from 'lucide-react';
 import { tools as allTools, Feature } from '@/lib/tools-client';
 import { DashboardServiceCard } from '@/components/ui/dashboard-service-card';
@@ -38,7 +37,7 @@ export default function MarketingPage() {
     const results = allTools.filter(tool =>
         tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tool.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))
+        (tool.categories && tool.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase())))
     );
     setFilteredTools(results);
   }, [searchTerm]);
@@ -95,7 +94,7 @@ export default function MarketingPage() {
             <section key={suite.id}>
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-primary/10 text-primary rounded-lg">
-                    <suite.icon className="h-6 w-6" />
+                    {suite.icon && <suite.icon className="h-6 w-6" />}
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold font-heading">{suite.name}</h2>

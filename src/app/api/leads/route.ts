@@ -1,5 +1,5 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, fail, bad, getUidFromRequest } from "@/lib/api-helpers";
 import { z } from 'zod';
 
@@ -13,6 +13,7 @@ const leadSchema = z.object({
 
 // GET /api/leads - Fetches all leads for the user
 export async function GET(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
   
   try {
@@ -30,6 +31,7 @@ export async function GET(req: Request) {
 
 // POST /api/leads - Creates a new lead for the user
 export async function POST(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
   
   try {

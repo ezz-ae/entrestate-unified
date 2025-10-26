@@ -1,5 +1,5 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, bad, fail } from "@/lib/api-helpers";
 
 export async function POST(req: Request) {
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const { event, uid, props } = body || {};
     if (!event) return bad("event required");
 
-    await adminDb.collection("events").add({
+    await getAdminDb().collection("events").add({
       event, uid: uid || "anon", props: props || {}, ts: new Date(), v: 1
     });
 

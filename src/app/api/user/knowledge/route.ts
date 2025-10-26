@@ -1,10 +1,11 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, fail, bad, getUidFromRequest } from "@/lib/api-helpers";
 import type { KnowledgeFile } from "@/types";
 
 // GET /api/user/knowledge - Fetches all knowledge base files for the user
 export async function GET(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
   
   try {
@@ -22,6 +23,7 @@ export async function GET(req: Request) {
 
 // DELETE /api/user/knowledge?fileId=... - Deletes a knowledge base file
 export async function DELETE(req: Request) {
+    const adminDb = getAdminDb();
     if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
 
     try {

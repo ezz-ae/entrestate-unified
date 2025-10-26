@@ -1,10 +1,11 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, fail } from "@/lib/api-helpers";
 import type { Project } from "@/types";
 import { cookies } from "next/headers";
 
 export async function GET(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) {
     return fail("Firebase Admin is not initialized. Check server environment.", 503);
   }
