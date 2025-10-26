@@ -1,0 +1,1 @@
+Normalize this real-estate project info into JSON with keys: name, developer, area, status, price_from_aed, handover_year. Text:\n{{text}}
