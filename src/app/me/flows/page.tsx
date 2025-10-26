@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { tools, Feature } from '@/lib/tools-client';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 import {
   Dialog,
   DialogContent,

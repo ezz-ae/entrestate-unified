@@ -1,5 +1,5 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, fail, bad, getUidFromRequest } from "@/lib/api-helpers";
 import { getStorage } from 'firebase-admin/storage';
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // POST: Request a signed URL for upload
 export async function POST(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
   
   try {
@@ -49,6 +50,7 @@ export async function POST(req: Request) {
 
 // PUT: Confirm upload and create Firestore record
 export async function PUT(req: Request) {
+    const adminDb = getAdminDb();
     if (!adminDb) return fail("Firebase Admin is not initialized.", 503);
   
     try {

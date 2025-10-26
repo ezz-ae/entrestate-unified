@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Palette, Upload, Save, BrainCircuit, FileText, Loader2, Trash2, CheckCircle, HelpCircle } from 'lucide-react';
+import { Palette, Upload, Save, BrainCircuit, FileText, Loader2, Trash2, CheckCircle, HelpCircle, Bot } from 'lucide-react';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { PageHeader } from '@/components/ui/page-header';
@@ -37,10 +37,10 @@ type BrandFormValues = z.infer<typeof brandSchema>;
 
 const StatusIcon = ({ status }: { status: KnowledgeFile['status'] }) => {
     const statusConfig = {
-        uploaded: { icon: <HelpCircle className="h-4 w-4 text-amber-500" />, text: 'Ready to Train' },
-        training: { icon: <Loader2 className="h-4 w-4 animate-spin text-blue-500" />, text: 'Training...' },
-        trained: { icon: <CheckCircle className="h-4 w-4 text-green-500" />, text: 'Trained' },
-        error: { icon: <HelpCircle className="h-4 w-4 text-red-500" />, text: 'Error' },
+        uploaded: { icon: <HelpCircle className="h-4 w-4 text-amber-500" />, text: 'Ready for Gemini Training' },
+        training: { icon: <Loader2 className="h-4 w-4 animate-spin text-blue-500" />, text: 'Gemini Training in Progress...' },
+        trained: { icon: <CheckCircle className="h-4 w-4 text-green-500" />, text: 'Trained by Gemini' },
+        error: { icon: <HelpCircle className="h-4 w-4 text-red-500" />, text: 'Error in Training' },
     };
     const { icon, text } = statusConfig[status] || statusConfig.uploaded;
     return (
@@ -221,13 +221,13 @@ export default function BrandPage() {
 
   const handleTrainAssistant = async () => {
       if (selectedFiles.length === 0) {
-        toast({ title: "No Files Selected", description: "Please select one or more files to train the AI.", variant: "destructive" });
+        toast({ title: "No Files Selected", description: "Please select one or more files to train Gemini AI.", variant: "destructive" });
         return;
       }
       setIsTraining(true);
       toast({
-          title: "AI Training Started",
-          description: `The assistant is now analyzing ${selectedFiles.length} file(s). This may take a moment.`,
+          title: "Gemini AI Training Started",
+          description: `Gemini is now analyzing ${selectedFiles.length} file(s). This may take a moment.`,
       });
       
       setFiles(prev => prev.map(f => selectedFiles.includes(f.id) ? {...f, status: 'training' as const} : f));
@@ -239,8 +239,8 @@ export default function BrandPage() {
       setFiles(prev => prev.map(f => selectedFiles.includes(f.id) ? {...f, status: 'trained' as const} : f));
 
       toast({
-          title: "AI Training Complete!",
-          description: "The AI's knowledge base has been updated. You can now ask it questions about the content of your files.",
+          title: "Gemini AI Training Complete!",
+          description: "Gemini's knowledge base has been updated. You can now ask it questions about the content of your files.",
       });
       setIsTraining(false);
       setSelectedFiles([]);
@@ -251,7 +251,7 @@ export default function BrandPage() {
         const uploadedFiles = event.target.files;
         if (!uploadedFiles || uploadedFiles.length === 0) return;
 
-        toast({ title: `Uploading ${uploadedFiles.length} file(s)...`});
+        toast({ title: `Uploading ${uploadedFiles.length} file(s) for Gemini training...`});
         
         for (const file of Array.from(uploadedFiles)) {
              try {
@@ -280,7 +280,7 @@ export default function BrandPage() {
             }
         }
         
-        toast({ title: "Uploads complete!"});
+        toast({ title: "Uploads complete for Gemini training!"});
         fetchKnowledgeFiles(); // Refresh the file list
     };
 
@@ -295,10 +295,10 @@ export default function BrandPage() {
             const data = await response.json();
             if (!data.ok) throw new Error(data.error);
 
-            toast({ title: 'File Deleted', description: 'The file has been removed from your knowledge base.' });
+            toast({ title: 'File Deleted', description: 'The file has been removed from Gemini\'s knowledge base.' });
             fetchKnowledgeFiles();
         } catch(e: any) {
-            toast({ title: 'Error', description: `Could not delete file: ${e.message}`, variant: 'destructive'});
+            toast({ title: 'Error', description: `Could not delete file from Gemini\'s knowledge base: ${e.message}`, variant: 'destructive'});
         }
     }
 
@@ -307,7 +307,7 @@ export default function BrandPage() {
     <main className="p-4 md:p-10 space-y-8">
       <PageHeader
         title="Brand &amp; Assets"
-        description="Manage your brand identity and the files that form the Knowledge Base for your AI assistant."
+        description="Manage your brand identity and the files that form the Gemini Knowledge Base for your AI assistant."
         icon={<Palette className="h-8 w-8" />}
       />
 
@@ -317,7 +317,7 @@ export default function BrandPage() {
                 <CardHeader>
                 <CardTitle>Your Brand Kit</CardTitle>
                 <CardDescription>
-                    Provide your logo, colors, and contact information. The AI will use these assets to ensure everything it creates is perfectly on-brand.
+                    Provide your logo, colors, and contact information. Gemini AI will use these assets to ensure everything it creates is perfectly on-brand.
                 </CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -388,9 +388,9 @@ export default function BrandPage() {
         <div className="lg:col-span-1 space-y-8 sticky top-24">
             <Card>
                 <CardHeader>
-                    <CardTitle>Knowledge Base</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><Bot className="h-5 w-5" /> Gemini Knowledge Base</CardTitle>
                     <CardDescription>
-                        Upload your brochures, market reports, and client lists to train your AI. This will enable it to answer questions about your specific data.
+                        Upload your brochures, market reports, and client lists directly to train Gemini AI. This will enable it to answer questions, generate content, and automate tasks using your specific data.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -417,19 +417,19 @@ export default function BrandPage() {
                                     <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleDeleteFile(file.id)}><Trash2 className="h-4 w-4 text-destructive/70 hover:text-destructive" /></Button>
                                 </div>
                             ))}
-                            {files.length === 0 && <p className="text-center text-sm text-muted-foreground py-10">No files uploaded yet.</p>}
+                            {files.length === 0 && <p className="text-center text-sm text-muted-foreground py-10">No files uploaded yet. Upload documents to train your Gemini AI!</p>}
                         </div>
                     )}
                      <Button onClick={() => fileInputRef.current?.click()} variant="outline" className="w-full mt-4">
                         <Upload className="mr-2 h-4 w-4" />
-                        Upload New File(s)
+                        Upload File(s) for Gemini AI
                     </Button>
                     <Input ref={fileInputRef} type="file" className="hidden" multiple onChange={handleFileUpload} />
                 </CardContent>
                 <CardFooter>
                     <Button onClick={handleTrainAssistant} disabled={selectedFiles.length === 0 || isTraining} className="w-full">
                         {isTraining ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <BrainCircuit className="mr-2 h-4 w-4" />}
-                        {isTraining ? 'Training AI...' : `Train AI on ${selectedFiles.length} file(s)`}
+                        {isTraining ? 'Training Gemini AI...' : `Train Gemini AI on ${selectedFiles.length} file(s)`}
                     </Button>
                 </CardFooter>
             </Card>

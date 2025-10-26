@@ -1,9 +1,10 @@
 
-import { adminDb } from "@/lib/firebaseAdmin";
+import { getAdminDb } from "@/lib/firebaseAdmin";
 import { ok, fail, bad, getUidFromRequest } from "@/lib/api-helpers";
 import type { Project } from "@/types";
 
 export async function GET(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) {
     return fail("Firebase Admin is not initialized. Check server environment.", 503);
   }
@@ -23,6 +24,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const adminDb = getAdminDb();
   if (!adminDb) {
     return fail("Firebase Admin is not initialized. Check server environment.", 503);
   }
@@ -45,6 +47,7 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+    const adminDb = getAdminDb();
     if (!adminDb) {
         return fail("Firebase Admin is not initialized. Check server environment.", 503);
     }

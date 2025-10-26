@@ -1,48 +1,65 @@
-'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { PageHeader } from '@/components/ui/page-header';
-import { Users2 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import Image from 'next/image';
-import { Logo } from '@/components/logo';
+import { PageHeader } from "@/components/ui/page-header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bot, BrainCircuit, Network, Gem } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
+    <div className="bg-background">
+      <main>
         <PageHeader
           title="About Entrestate"
-          description="We are building the AI-native operating system for the real estate industry."
-          icon={<Users2 className="h-8 w-8" />}
+          description="We are building the AI-Native Operating System for the future of real estate."
         />
-        <div className="w-full max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-20">
-          <Card className="bg-card/80 backdrop-blur-lg">
-              <CardContent className="p-8 md:p-12 prose prose-lg dark:prose-invert max-w-none">
-                  <div className="flex justify-center mb-8">
-                      <Logo />
-                  </div>
-                  
-                  <h2>A Note from the Creator</h2>
-                  <p>
-                      In the fast-paced world of real estate, the gap between data and decision is where fortunes are made and lost. For years, I watched brilliant agents, developers, and marketers operate with fragmented tools and incomplete information, relying on intuition where they should have had certainty.
-                  </p>
-                  <p>
-                      That’s why Entrestate was born. It’s not about replacing the agent, but empowering them to become a "Super Agent." It’s about transforming raw, chaotic market data—from portals like Bayut and Property Finder, to social trends and DLD records—into clear, actionable intelligence. It's about automating the mundane tasks that consume 80% of your day, so you can focus on what you do best: building relationships and closing deals.
-                  </p>
-                  <p>
-                      We are forging a new paradigm where technology and human expertise converge to create an unparalleled advantage. This is more than a company; it's a commitment to building the future of real estate, one intelligent tool at a time.
-                  </p>
+        <div className="container mx-auto px-4 md:px-8 py-12">
+          <section className="text-center">
+            <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
+            <p className="max-w-3xl mx-auto text-muted-foreground">
+              To empower every real estate professional with a true AI partner, an intelligent ecosystem that automates workflows, uncovers opportunities, and provides the creative and analytical tools needed to thrive in a competitive market. We believe the future of real estate is not just about data, but about intelligence.
+            </p>
+          </section>
 
-                  <div className="text-center mt-12">
-                      <Link href="/me">
-                          <Button size="lg">Join Us in Building the Future</Button>
-                      </Link>
-                  </div>
-              </CardContent>
-          </Card>
+          <section className="mt-16">
+            <h2 className="text-3xl font-bold text-center mb-8">The Technology Behind the Intelligence</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card>
+                <CardHeader className="items-center">
+                  <Gem className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>Google Gemini</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center text-sm text-muted-foreground">
+                  At our core is Gemini, Google's most advanced generative AI model. It powers our conversational intelligence, content creation, and strategic analysis, providing a level of understanding and creativity that is second to none.
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="items-center">
+                  <BrainCircuit className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>Genkit AI Framework</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center text-sm text-muted-foreground">
+                  Our entire AI infrastructure is built on the robust and scalable Genkit framework. This allows us to create, deploy, and manage complex, multi-step AI flows that connect different models and services into a unified, intelligent system.
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="items-center">
+                  <Bot className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>WhatsMAP Engine</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center text-sm text-muted-foreground">
+                  Our proprietary WhatsMAP engine is the brain of the operation. It uses a sophisticated Parse-Execute-Synthesize pipeline to understand your intent, orchestrate actions across the platform, and deliver proactive, context-aware insights.
+                </CardContent>
+              </Card>
+               <Card>
+                <CardHeader className="items-center">
+                  <Network className="h-10 w-10 text-primary mb-2" />
+                  <CardTitle>Vertex AI & Firebase</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center text-sm text-muted-foreground">
+                  We leverage the full power of the Google Cloud ecosystem, using Vertex AI for advanced machine learning and Firebase for a secure, scalable, and real-time backend infrastructure that powers our entire platform.
+                </CardContent>
+              </Card>
+            </div>
+          </section>
         </div>
       </main>
     </div>

@@ -1,37 +1,45 @@
 
 'use client';
 
-import React from 'react';
-import { PageHeader } from '@/components/ui/page-header';
-import { Sparkles, Telescope, MessageCircle, FileJson } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import Link from 'next/link';
-import { solutions } from '@/lib/solutions-data';
+import { PageHeader } from "@/components/ui/page-header";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { suites } from '@/lib/tools-data';
 
 export default function SolutionsPage() {
-  return (
-    <div className="container mx-auto px-4 py-8 md:py-12">
-        <PageHeader
-        title="Our Solutions"
-        description="High-level, outcome-oriented products that solve major business problems for the real estate industry."
-        icon={<Sparkles className="h-8 w-8" />}
-        />
-    
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-            {solutions.map(solution => (
-                <Link href={`/solutions/${solution.slug}`} key={solution.slug}>
-                    <Card className="h-full hover:border-primary/50 hover:shadow-lg transition-all hover:-translate-y-1 bg-card/50 backdrop-blur-lg">
-                        <CardHeader>
-                            <div className="p-4 bg-primary/10 text-primary rounded-2xl w-fit mb-4">
-                                {solution.slug === 'pro-search-eng-x3' ? <Telescope className="h-8 w-8" /> : solution.slug === 'estchat-x3' ? <MessageCircle className="h-8 w-8" /> : <FileJson className="h-8 w-8" />}
-                            </div>
-                            <CardTitle>{solution.title}</CardTitle>
-                            <CardDescription>{solution.description}</CardDescription>
-                        </CardHeader>
-                    </Card>
-                </Link>
-            ))}
+    return (
+        <div className="bg-background">
+            <main>
+                <PageHeader
+                    title="Our Solutions"
+                    description="An overview of all the suites and verticals that the Entrestate OS has to offer."
+                />
+                <div className="container mx-auto px-4 md:px-8 py-12">
+                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {suites.map(suite => (
+                            <Card key={suite.id} className="flex flex-col">
+                                <CardHeader>
+                                    <CardTitle className="flex items-start gap-2">
+                                        {suite.icon}
+                                        <span>{suite.name}</span>
+                                    </CardTitle>
+                                    <CardDescription>{suite.description}</CardDescription>
+                                </CardHeader>
+                                <CardContent className="flex-grow" />
+                                <CardFooter>
+                                    <Link href={`/solutions/${suite.id}`} className="w-full">
+                                        <Button className="w-full">
+                                            Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                                        </Button>
+                                    </Link>
+                                </CardFooter>
+                            </Card>
+                        ))}
+                     </div>
+                </div>
+            </main>
         </div>
-    </div>
-  );
+    );
 }
