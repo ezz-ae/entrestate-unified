@@ -1,0 +1,18 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid}/{document=**} {
+      allow read, write: if request.auth.uid == uid;
+    }
+    match /projects_catalog/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /marketData/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

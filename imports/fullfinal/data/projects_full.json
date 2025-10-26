@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Emaar Beachfront",
+    "slug": "emaar-beachfront",
+    "city": "Dubai",
+    "status": "off-plan",
+    "priceFrom": 2500000,
+    "developerId": "emaar",
+    "lastVerifiedAt": 1672531200000
+  },
+  {
+    "name": "Sobha Hartland",
+    "slug": "sobha-hartland",
+    "city": "Dubai",
+    "status": "ready",
+    "priceFrom": 1800000,
+    "developerId": "sobha",
+    "lastVerifiedAt": 1672531200000
+  },
+  {
+    "name": "Damac Hills 2",
+    "slug": "damac-hills-2",
+    "city": "Dubai",
+    "status": "off-plan",
+    "priceFrom": 1200000,
+    "developerId": "damac",
+    "lastVerifiedAt": 1672531200000
+  }
+]
