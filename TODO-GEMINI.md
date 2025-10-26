@@ -1,0 +1,5 @@
+- [ ] Wire /api/flows/execute to /backend runner
+- [ ] WhatsApp → job creation
+- [ ] Market Library adapters
+- [ ] PDF renderer worker
+- [ ] Suite dashboards data
